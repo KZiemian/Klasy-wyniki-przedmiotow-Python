@@ -38,7 +38,9 @@ class Przedmiot(object):
         self.__opis_przedmiotu = str(nazwa_przedmiotu) + '\n' + \
                                 str(semestr).capitalize() +  ' '  \
                                 + str(rok_akademicki) + '\n'
-        self.__lista_studentów = []
+        self.__lista_stud = []
+
+        self.__opis_wynikow = u"Imię      Nazwisko  "
 
 
     def dodaj_studenta(self, student_inst):
@@ -63,7 +65,7 @@ class Grupa(Przedmiot):
     def __init__(self, nazwa_przedmiotu, semester, rok_akademicki,
                  numer_grupy):
         Przedmiot.__init__(self, nazwa_przedmiotu, semestr, rok_akademicki)
-        self.__numer_grupy = numer_grupy
+        self.__num_grupy = numer_grupy
         self.nazwa_pliku_z_wynikami = nazwa_przedmiotu + '-' + semestr \
                                       + '-' + rok_akademicki + '-' \
                                       + 'Grupa-' + str(numer_grupy) \
@@ -81,6 +83,10 @@ class Grupa(Przedmiot):
 
     def byl_sprawdzian(self):
         self.__ilosc_sprawdzianow += 1
+
+
+    def bylo_zajec(self):
+        return self.__ilosc_zajec
         
 
 
@@ -215,11 +221,15 @@ class GrupaZesZadProOce(Grupa):
                  numer_grupy):
         GrupaZesZad.__init__(self, nazwa_przedmiotu, semestr, rok_akademicki,
                        numer_grupy)
-        self.__ilosc_projektow = 0
+        self.__licz_proj = 0
+
+        self.__opis_wyni +=  "Fre. %  Punkty  Oce. śr. z projektow\n"
 
 
-    def byl_projekt(self):
-        self.__ilosc_projektow += 1
-
+    def byl_proj(self):
+        self.__ilosc_proj += 1
+        
+    def liczba_proj(self):
+        return self.__ilosc_proj
 
 
