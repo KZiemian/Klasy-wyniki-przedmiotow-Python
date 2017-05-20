@@ -266,8 +266,8 @@ class GrupaZesZadProOce(object):
         self.__zestawy_zadan_punktacja = []
         
         self.__liczba_proj = 0
-        self.__opis_wyn = "Imie       Nazwisko    " \
-                          "Fre. %  Punkty  Oce. sre. z projektow\n"
+        self.__opis_wyn = "Imie       Nazwisko      " \
+                          "Fre. %   Punkty   Oce. sre. z projektow\n"
 
         # Zrób tak, by += w powyższym wzorze działało.
 
@@ -297,7 +297,7 @@ class GrupaZesZadProOce(object):
             u"Punktacja zestawu nie jest krotką!"
 
         self.__ilosc_zestawow_zadan += 1
-        self.__zestawy_zadan_puktacja.append(punktacja_zestawu)
+        self.__zestawy_zadan_punktacja.append(punktacja_zestawu)
 
 
     def byl_proj(self):
@@ -306,6 +306,14 @@ class GrupaZesZadProOce(object):
         
     def liczba_proj(self):
         return self.__liczba_proj
+
+    def max_punkty(self):
+        max_punktow = 0
+
+        for krot_punkt in self.__zestawy_zadan_punkt:
+            max_punktow += sum(krot_punkt, 0.0)
+
+        return max_punktow
 
 
     def zapisz_do_pliku(self):

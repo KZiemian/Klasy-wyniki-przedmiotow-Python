@@ -111,7 +111,7 @@ class StudentCwiZesZadProOce(object):
 
         self.__obecnosc = 0
         
-        self.__rozwi_zest_zad = []
+        self.__rozwi_zes_zad = []
 
         self.__oceny_za_proj = []
         # super(StudentCwiZesZadProOce, self).__init__(imie_studenta,
@@ -152,12 +152,30 @@ class StudentCwiZesZadProOce(object):
                 # print opis_wynik_stud
 
         if (ilosc_zajec != 0):
-            opis_wynik_stud += "  " \
-                               + ("%.1f") % (100 * float(self.__obecnosc)
-                                             / ilosc_zajec) + "  "
+            frek_str = str(round(100 * float(self.__obecnosc)
+                                 / ilosc_zajec, 2))# .rjust(7)
+            opis_wynik_stud += "  " + frek_str.rjust(7) + "  "
+            del frek_str
             opis_wynik_stud = opis_wynik_stud.rjust(5)
         else:
             opis_wynik_stud += "  Nic  "
+
+
+        if (len(self.__rozwi_zes_zad) > 0):
+            punkty_zad = 0.0
+            max_punkty = self.__przed_inst.max_punkty()
+
+            for krotka_punk in self.__rozwi_zes_zad:
+                punkty_zad += sum(krotka_pun, 0.0)
+
+            punkt_str = str(punkty_zad) + "/" + str(max_punkty)
+            del punkt_str
+            
+            opis_wynik_stud = "  " + punkt_str.rjust(5) + "  "
+            
+        else:
+            opis_wynik_stud += "  Nic  "
+        
 
         ilosc_proj = self.__przed_inst.liczba_proj()
 
@@ -166,7 +184,7 @@ class StudentCwiZesZadProOce(object):
         else:
             oce_srd_proj = "  Nic  "
 
-        opis_wynik_stud += "  " + str(oce_srd_proj) + "\n"
+        opis_wynik_stud += "  " + str(oce_srd_proj).rjust(4) + "\n"
 
         if (self.__komentarz != ''):
             opis_wynik_stud += self.__komentarz
