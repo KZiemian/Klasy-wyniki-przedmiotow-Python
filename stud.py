@@ -112,7 +112,7 @@ class StudentCwiZesZadProOce(object):
 
         self.__obecnosc = 0 # Liczba zajęć na których student był.
 
-        self.__rozwi_zes_zad = [] # List zawierający rozwiązane
+        self.__rozw_zes_zad = [] # List zawierający rozwiązane
         # przez studenta zestawy zadań. Zestaw zadań reprezentuje krotka
         # z punktami które dostał za zadania (bądź podpunkt zadania,
         # jeśli to on są puntkowane), albo "False" jeśli nie oddał żadnego.
@@ -167,25 +167,25 @@ class StudentCwiZesZadProOce(object):
             opis_wynik_stud += "  Nic  "
 
 
-        if (len(self.__rozwi_zes_zad) > 0):
+        if (len(self.__rozw_zes_zad) > 0):
             punkty_zad = 0.0
             max_punkty = self.__przed_inst.max_punkty()
 
-            for krotka_punk in self.__rozwi_zes_zad:
-                punkty_zad += sum(krotka_pun, 0.0)
+            for krotka_punk in self.__rozw_zes_zad:
+                punkty_zad += sum(krotka_punk, 0.0)
 
-            punkt_str = str(punkty_zad) + "/" + str(max_punkty)
-            del punkt_str
+                punkt_str = str(punkty_zad) + "/" + str(int(max_punkty))
 
-            opis_wynik_stud = "  " + punkt_str.rjust(5) + "  "
+                opis_wynik_stud += "  " + punkt_str.rjust(5) + "  "
+                del punkt_str
 
-            else:
+        else:
             opis_wynik_stud += "  Nic  "
 
 
-            ilosc_proj = self.__przed_inst.liczba_proj()
+        ilosc_proj = self.__przed_inst.liczba_proj()
 
-            if (ilosc_proj != 0):
+        if (ilosc_proj != 0):
             oce_srd_proj = sum(self.__oceny_za_proj, 0.0) / ilosc_proj
         else:
             oce_srd_proj = "  Nic  "

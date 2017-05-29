@@ -40,7 +40,7 @@ class Przedmiot(object):
     def przed_atrybuty(self, nazwa_przedmiotu, semestr, rok_akad):
         self.__opis_przed = str(nazwa_przedmiotu) + ', semestr ' \
                             + str(semestr) + ' ' + str(rok_akad) + '\n'
-        
+
         self.__lista_stud = []
         self.__opis_wyn = "Imie      Nazwisko  "
         self.__nazwa_pliku_z_wyn = nazwa_przedmiotu + '-' + semestr \
@@ -92,7 +92,7 @@ class Grupa(Przedmiot):
         self.__ilosc_sprawdzianow = 0 # Kolokwium = łac. odpowiedź ustana.
         # Mi to nie pasuje.
 
-        
+
     def odbyly_sie_zajecia(self):
         u"""Zwiększa atrybut SELF.__ILOSC_ZAJEC o 1."""
         self.__ilosc_zajec += 1
@@ -104,7 +104,7 @@ class Grupa(Przedmiot):
 
     def bylo_zajec(self):
         return self.__ilosc_zajec
-        
+
 
 
 ######################################################################
@@ -136,7 +136,7 @@ class GrupaZesZad(Grupa):
 
         self.__zestawy_zadan_puktacja.append(punktacja_zestawu)
 
-    
+
 
 ######################################################################
 # Klasa Grupa Projekt Ocena
@@ -156,7 +156,7 @@ class GrupaProOce(Grupa):
     def byl_projekt(self):
         self.__ilosc_projektow += 1
 
-    
+
 
 ######################################################################
 # Klasa Grupa Projekt Punkty
@@ -181,7 +181,7 @@ class GrupaProPun(Grupa):
         self.__ilosc_projektow += 1
         self.__zestawy_zadan_puktacja.append(punktacja_zestawu)
 
-    
+
 
 ######################################################################
 # Klasa Grupa Projekt Ocena
@@ -200,7 +200,7 @@ class GrupaProOce(Grupa):
     def byl_projekt(self):
         self.__ilosc_projektow += 1
 
-    
+
 
 ######################################################################
 # Klasa Grupa Sprawdzian Punkty
@@ -214,7 +214,7 @@ class GrupaSprPun(Grupa):
         Grupa.__init__(self, nazwa_przedmiotu, semestr, rok_akademicki,
                        numer_grupy)
         self.__ilosc_sprawdzianow = 0
-        
+
 
 
     def byl_sprawdzian(self, punktacja_sprawdzianu):
@@ -240,7 +240,7 @@ class GrupaZesZadProOce(object):
     u"""Grupa, zestaw zadań, projekt za ocenę."""
 
     # Straszna chała, ale działa.
-    
+
     def __init__(self, nazwa_przedmiotu, semestr, rok_akad,
                  numer_grupy):
         # self.przed_atrybuty(nazwa_przedmiotu, semestr, rok_akad)
@@ -252,7 +252,7 @@ class GrupaZesZadProOce(object):
                             + str(semestr) + ' ' + str(rok_akad) + '\n'
 
         self.__lista_stud = []
-        
+
         self.__num_grupy = numer_grupy
         self.__nazwa_pliku_z_wyn = nazwa_przedmiotu + '-' + semestr \
                                  + '-' + rok_akad + '-' \
@@ -264,7 +264,7 @@ class GrupaZesZadProOce(object):
 
         self.__ilosc_zestawow_zadan = 0
         self.__zestawy_zadan_punktacja = []
-        
+
         self.__liczba_proj = 0
         self.__opis_wyn = "Imie       Nazwisko      " \
                           "Fre. %   Punkty   Oce. sre. z projektow\n"
@@ -303,15 +303,16 @@ class GrupaZesZadProOce(object):
     def byl_proj(self):
         self.__liczba_proj += 1
 
-        
+
     def liczba_proj(self):
         return self.__liczba_proj
 
     def max_punkty(self):
         max_punktow = 0
 
-        for krot_punkt in self.__zestawy_zadan_punkt:
-            max_punktow += sum(krot_punkt, 0.0)
+        for krot_punkt in self.__zestawy_zadan_punktacja:
+            max_punktow += sum(krot_punkt)
+            # Upewnij się, że ta lista skład się tylko z intów.
 
         return max_punktow
 
@@ -322,4 +323,3 @@ class GrupaZesZadProOce(object):
             wyniki.write(self.__opis_wyn)
             for student in self.__lista_stud:
                 wyniki.write(student.wyniki_studenta())
-
