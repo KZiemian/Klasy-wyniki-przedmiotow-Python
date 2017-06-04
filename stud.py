@@ -174,10 +174,11 @@ class StudentCwiZesZadProOce(object):
             for krotka_punk in self.__rozw_zes_zad:
                 punkty_zad += sum(krotka_punk, 0.0)
 
-                punkt_str = str(punkty_zad) + "/" + str(int(max_punkty))
+            # To powinno być na zewnątrz pętli
+            punkt_str = str(punkty_zad) + "/" + str(int(max_punkty))
 
-                opis_wynik_stud += "  " + punkt_str.rjust(5) + "  "
-                del punkt_str
+            opis_wynik_stud += "  " + punkt_str.rjust(5) + "  "
+            del punkt_str
 
         else:
             opis_wynik_stud += "  Nic  "
